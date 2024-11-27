@@ -2,19 +2,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
     color: #333;
 }
 
-header {
+header, footer {
     background: #4CAF50;
-    color: #fff;
-    padding: 10px 0;
+    color: white;
     text-align: center;
-}
-
-header .logo h1 {
-    margin: 0;
+    padding: 10px;
 }
 
 header nav ul {
@@ -24,52 +19,37 @@ header nav ul {
 
 header nav ul li {
     display: inline;
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 header nav ul li a {
-    color: #fff;
+    color: white;
     text-decoration: none;
 }
 
-.banner {
-    text-align: center;
-    padding: 50px 20px;
-    background: #f4f4f4;
-}
-
-#products {
+main {
     padding: 20px;
+}
+
+.product-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.product, .button {
+    border: 1px solid #ddd;
+    padding: 10px;
     text-align: center;
 }
 
-.product {
-    margin: 20px auto;
-    padding: 10px;
-    border: 1px solid #ddd;
-    max-width: 300px;
-    display: inline-block;
-}
-
-.product h3 {
-    margin: 0 0 10px;
-}
-
-button {
+.button {
     background: #4CAF50;
     color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+    margin: 10px 0;
 }
 
-button:hover {
-    background: #45a049;
-}
-
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background: #333;
-    color: white;
-}
