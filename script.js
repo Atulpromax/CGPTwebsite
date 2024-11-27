@@ -1,29 +1,66 @@
-// Display a message when a product is added to the cart
-function addToCart(productName, price) {
-    alert(`🎉 Success! '${productName}' has been added to your cart for ₹${price}.`);
-}
+// Highlight the current page in the navigation
+function highlightCurrentPage() {
+    const navLinks = document.querySelectorAll("nav ul li a");
+    const currentPage = window.location.pathname.split("/").pop();
 
-// Function to dynamically attach event listeners to buttons
-function setupEventListeners() {
-    // Select all "Buy Now" buttons
-    const buyButtons = document.querySelectorAll("button");
-
-    // Attach click event listeners
-    buyButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            // Extract product information
-            const productName = button.parentElement.querySelector("h3").innerText;
-            const priceText = button.parentElement.querySelector("p").innerText;
-            const price = priceText.replace("Price: ₹", ""); // Extract price number
-
-            // Add to cart functionality
-            addToCart(productName, price);
-        });
+    navLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === currentPage) {
+            link.classList.add("active");
+        }
     });
 }
 
-// Initialize the website scripts
+// Simulate a simple cart for future expansion
+const cart = [];
+
+// Add a product to the cart
+function addToCart(productName, price) {
+    cart.push({ productName, price });
+    alert(`🎉 '${productName}' has been added to your cart for ₹${price}.`);
+}
+
+// Validate the checkout form (if needed for an actual gateway later)
+function validateCheckoutForm() {
+    const form = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+        const nameInput = document.querySelector("#name");
+        const emailInput = document.querySelector("#email");
+
+        if (!nameInput.value.trim() || !emailInput.value.trim()) {
+            alert("Please fill in all the required fields.");
+            event.preventDefault();
+        } else {
+            alert("Proceeding to payment...");
+        }
+    });
+}
+
+// Initialize scripts for all pages
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Website loaded successfully! Setting up event listeners...");
-    setupEventListeners();
+    console.log("Website loaded successfully!");
+
+    // Highlight navigation links
+    highlightCurrentPage();
+
+    // Additional page-specific logic
+    const page = window.location.pathname.split("/").pop();
+
+    if (page === "products.html") {
+        // Add event listeners to "Buy Now" buttons
+        const buyButtons = document.querySelectorAll(".button");
+        buyButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const productName = button.parentElement.querySelector("h2").innerText;
+                const priceText = button.parentElement.querySelector("p").innerText;
+                const price = priceText.replace("Price: ₹", ""); // Extract price
+                addToCart(productName, price);
+            });
+        });
+    }
+
+    if (page === "checkout.html") {
+        // Validate the checkout form
+        validateCheckoutForm();
+    }
 });
